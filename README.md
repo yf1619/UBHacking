@@ -23,7 +23,6 @@ Interactive Story Generator is a web-based application that allows users to shap
 
 ### 📄 Chinese Version (README.md)
 
-```markdown
 # 互动故事生成器
 
 ## 项目简介
@@ -46,4 +45,7 @@ Interactive Story Generator is a web-based application that allows users to shap
 - **JavaScript**：用于实现故事逻辑和交互功能。
 
 ## 项目结构
+
+```
+
 ```

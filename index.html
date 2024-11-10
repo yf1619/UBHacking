@@ -38,7 +38,11 @@
   <body>
     <header class="header-main">
       <div class="header-container">
-        <a href="#" class="header-logo" style="font-weight: normal"
+        <a
+          href="#"
+          class="header-logo"
+          style="font-weight: normal"
+          onclick="scrollToTop(event)"
           >COHERE.AI</a
         >
         <nav class="header-nav">
@@ -355,5 +359,15 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
   </body>
 </html>

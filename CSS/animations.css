@@ -1,0 +1,51 @@
+/* Page load animations */
+@keyframes blurToClear {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Apply animations to different sections with staggered timing */
+.header-main {
+  animation: blurToClear 0.8s ease-out;
+}
+
+.section-hero {
+  animation: blurToClear 0.8s ease-out 0.2s;
+  animation-fill-mode: backwards;
+}
+
+.hero-text-box {
+  animation: blurToClear 0.8s ease-out 0.4s;
+  animation-fill-mode: backwards;
+}
+
+.section-featured {
+  animation: blurToClear 0.8s ease-out 0.6s;
+  animation-fill-mode: backwards;
+}
+
+.section-how {
+  animation: blurToClear 0.8s ease-out 0.8s;
+  animation-fill-mode: backwards;
+}
+
+.section-testimonials {
+  animation: blurToClear 0.8s ease-out 1s;
+  animation-fill-mode: backwards;
+}
+
+.section-cta {
+  animation: blurToClear 0.8s ease-out 1.2s;
+  animation-fill-mode: backwards;
+}
+
+.footer {
+  animation: blurToClear 0.8s ease-out 1.4s;
+  animation-fill-mode: backwards;
+}

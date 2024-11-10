@@ -68,13 +68,12 @@
           <div class="hero-text-box">
             <h1 class="heading-primary">University Data API</h1>
             <p class="hero-description" id="api-response">
-              Loading university data...
+              Click Fetch Data to get university information
             </p>
             <p class="hero-description" id="csv-content">
               <!-- CSV content will be displayed here -->
             </p>
             <div class="api-controls">
-              <input type="file" id="file-input" accept=".txt" class="btn" />
               <input
                 type="number"
                 id="num-universities"
@@ -82,10 +81,6 @@
                 min="1"
                 class="btn"
               />
-              <select id="response-type" class="btn">
-                <option value="csv">CSV</option>
-                <option value="graph">Graph</option>
-              </select>
               <button onclick="fetchData()" class="btn btn--full">
                 Fetch Data
               </button>

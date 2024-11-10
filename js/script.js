@@ -130,20 +130,18 @@ checkFlexGap();
 */
 
 async function fetchData() {
-  const fileInput = document.getElementById("file-input");
   const numUniversities = document.getElementById("num-universities").value;
-  const responseType = document.getElementById("response-type").value;
   const apiResponseElement = document.getElementById("api-response");
 
-  if (!fileInput.files[0]) {
-    apiResponseElement.textContent = "Please select a text file";
-    return;
-  }
-
   const formData = new FormData();
-  formData.append("file", fileInput.files[0]);
+  const promptText =
+    "List the U.S. universities ranked in the top 100 by U.S. News in 2024 that have the lowest tuition fees for Chinese international undergraduate students. Provide the university name, U.S. News ranking, and the estimated tuition fee for international students.";
+
+  // Create a Blob from the prompt text and append it as a file
+  const promptBlob = new Blob([promptText], { type: "text/plain" });
+  formData.append("file", promptBlob, "prompt.txt");
   formData.append("number_of_universities", numUniversities);
-  formData.append("response_type", responseType);
+  formData.append("response_type", "csv"); // Hardcode CSV as response type
 
   try {
     apiResponseElement.textContent = "Fetching data...";
@@ -159,98 +157,54 @@ async function fetchData() {
 
     const contentType = response.headers.get("content-type");
 
-    if (responseType === "csv") {
-      if (contentType && contentType.includes("text/csv")) {
-        // Handle CSV response
-        const blob = await response.blob();
-        const csvText = await blob.text(); // Convert blob to text
+    if (contentType && contentType.includes("text/csv")) {
+      // Handle CSV response
+      const blob = await response.blob();
+      const csvText = await blob.text();
 
-        // Display CSV content on the webpage
-        const csvContentElement = document.getElementById("csv-content");
-        const rows = csvText.split("\n");
-        let formattedHtml = '<div class="csv-display">';
+      // Display CSV content on the webpage
+      const csvContentElement = document.getElementById("csv-content");
+      const rows = csvText.split("\n");
+      let formattedHtml = '<div class="csv-display">';
 
-        rows.forEach((row, index) => {
-          const columns = row.split(",");
-          if (index === 0) {
-            // Header row
-            formattedHtml += '<div class="csv-header">';
-            formattedHtml += `<span class="csv-cell">Name</span>`;
-            formattedHtml += `<span class="csv-cell">Details</span>`;
-            formattedHtml += "</div>";
-          } else if (row.trim()) {
-            // Data rows
-            formattedHtml += '<div class="csv-row">';
-            formattedHtml += `<span class="csv-cell">${columns[0]}</span>`; // Name
-            formattedHtml += `<span class="csv-cell">${columns
-              .slice(1)
-              .join(",")}</span>`; // Details
-            formattedHtml += "</div>";
-          }
-        });
-        formattedHtml += "</div>";
-        csvContentElement.innerHTML = formattedHtml;
-
-        // Also download the file as before
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "universities_data.csv";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        apiResponseElement.textContent =
-          "CSV file downloaded and displayed below!";
-      } else {
-        // If server sent an error message instead of CSV
-        const text = await response.text();
-        apiResponseElement.textContent = `Error: ${text}`;
-      }
-    } else if (responseType === "graph") {
-      if (contentType && contentType.includes("image")) {
-        const blob = await response.blob();
-        const imgUrl = URL.createObjectURL(blob);
-        apiResponseElement.innerHTML = `<img src="${imgUrl}" alt="Universities Graph" style="max-width: 100%; height: auto;">`;
-      } else {
-        const text = await response.text();
-        apiResponseElement.textContent = `Error: ${text}`;
-      }
-    } else {
-      // Handle JSON response
-      if (contentType && contentType.includes("application/json")) {
-        const data = await response.json();
-        if (data.error) {
-          throw new Error(data.error);
+      rows.forEach((row, index) => {
+        const columns = row.split(",");
+        if (index === 0) {
+          // Header row
+          formattedHtml += '<div class="csv-header">';
+          formattedHtml += `<span class="csv-cell">Name</span>`;
+          formattedHtml += `<span class="csv-cell">Details</span>`;
+          formattedHtml += "</div>";
+        } else if (row.trim() && !row.includes("Please note")) {
+          // Data rows
+          formattedHtml += '<div class="csv-row">';
+          formattedHtml += `<span class="csv-cell">${columns[0]}</span>`; // Name
+          const details = columns
+            .slice(1)
+            .join(",")
+            .split("Please note")[0]
+            .trim();
+          formattedHtml += `<span class="csv-cell">${details}</span>`; // Details
+          formattedHtml += "</div>";
         }
+      });
+      formattedHtml += "</div>";
+      csvContentElement.innerHTML = formattedHtml;
 
-        // Format the text response with better styling
-        const universities = data.generated_text.split("\n");
-        let formattedHtml = '<div class="university-list">';
-
-        universities.forEach((line) => {
-          if (line.trim()) {
-            if (line.startsWith("Here is")) {
-              formattedHtml += `<h3>${line}</h3>`;
-            } else if (line.match(/^\d+\./)) {
-              formattedHtml += `<div class="university-item">`;
-              formattedHtml += `<h4>${line}</h4>`;
-            } else if (line.startsWith("-")) {
-              formattedHtml += `<p>${line}</p>`;
-            } else if (line.startsWith("Please note")) {
-              formattedHtml += `</div><p class="note">${line}</p>`;
-            } else if (line.trim()) {
-              formattedHtml += `</div>`;
-            }
-          }
-        });
-
-        formattedHtml += "</div>";
-        apiResponseElement.innerHTML = formattedHtml;
-      } else {
-        const text = await response.text();
-        apiResponseElement.textContent = `Error: ${text}`;
-      }
+      // Also download the file as before
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "universities_data.csv";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      apiResponseElement.textContent =
+        "CSV file downloaded and displayed below!";
+    } else {
+      const text = await response.text();
+      apiResponseElement.textContent = `Error: ${text}`;
     }
   } catch (error) {
     apiResponseElement.textContent = `Error: ${error.message}`;

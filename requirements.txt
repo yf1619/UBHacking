@@ -1,0 +1,6 @@
+Flask
+matplotlib
+cohere
+pandas
+flask-cors
+

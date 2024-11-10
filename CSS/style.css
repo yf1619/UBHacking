@@ -224,7 +224,7 @@
 }
 
 .delivered-text span {
-  color: #cf711f;
+  color: #1e1e1e;
   font-weight: 700;
 }
 
@@ -687,12 +687,12 @@
 .university-item {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background-color: #fdf2e9;
+  background-color: #1e1e1e;
   border-radius: 9px;
 }
 
 .university-item h4 {
-  color: #e67e22;
+  color: #1e1e1e;
   margin-bottom: 1rem;
   font-size: 1.6rem;
 }
@@ -716,14 +716,14 @@
 
 .csv-display {
   margin-top: 3rem;
-  border: 2px solid #e67e22;
+  border: 2px solid #1e1e1e;
   border-radius: 12px;
   overflow: visible;
   scroll-behavior: smooth;
 }
 
 .csv-header {
-  background-color: #e67e22;
+  background-color: #1e1e1e;
   color: white;
   font-weight: 600;
   padding: 3rem;
@@ -737,7 +737,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid #eee;
-  background-color: #fff;
+  background-color: #1e1e1e;
   min-height: fit-content;
 }
 
@@ -746,7 +746,11 @@
 }
 
 .csv-row:nth-child(even) {
-  background-color: #fdf2e9;
+  background-color: #1e1e1e;
+}
+
+.csv-row:nth-child(odd) {
+  background-color: #1e1e1e;
 }
 
 .csv-cell {
@@ -840,20 +844,21 @@
 }
 
 #csv-content::-webkit-scrollbar-track {
-  background: #fdf2e9;
+  background: #000000; /* Black */
   border-radius: 8px;
 }
 
 #csv-content::-webkit-scrollbar-thumb {
-  background-color: #e67e22;
+  background-color: #9f8ac1; /* Purple */
   border-radius: 8px;
-  border: 3px solid #fdf2e9;
+  border: 3px solid #000000; /* Black */
 }
 
 /* Add Firefox scrollbar styling */
 #csv-content {
   scrollbar-width: thin;
-  scrollbar-color: #e67e22 #fdf2e9;
+  scrollbar-color: #9f8ac1 #000000; /* Purple thumb, black track */
+  color: #ffffff; /* White font */
 }
 
 /* Ensure content rows are properly sized */
@@ -871,7 +876,7 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  background-color: #e67e22;
+  background-color: #9f8ac1;
 }
 
 /* General Styles */

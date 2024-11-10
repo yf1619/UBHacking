@@ -36,7 +36,7 @@
   <body>
     <header class="header">
       <div class="container">
-        <a href="#" class="logo">COHERE.AI</a>
+        <a href="#" class="logo" style="font-weight: normal">COHERE.AI</a>
         <nav class="main-nav">
           <ul class="main-nav-list">
             <li><a class="main-nav-link" href="#how">How it works</a></li>
@@ -64,9 +64,9 @@
                 id="num-universities"
                 placeholder="Number of universities"
                 min="1"
-                class="btn"
+                class="search-input"
               />
-              <button onclick="fetchData()" class="btn btn--full">
+              <button onclick="fetchData()" class="call-button">
                 Fetch Data
               </button>
             </div>
@@ -108,7 +108,8 @@
         <div class="container align-with-logo">
           <span class="subheading align-left">How it works</span>
           <h2 class="heading-secondary align-left">
-            Let's find AFFORDABLE universities
+            Let's find
+            <span class="affordable-text">AFFORDABLE</span> universities
           </h2>
         </div>
 

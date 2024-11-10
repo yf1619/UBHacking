@@ -128,3 +128,102 @@ checkFlexGap();
   }
 }
 */
+
+async function fetchData() {
+  const fileInput = document.getElementById("file-input");
+  const numUniversities = document.getElementById("num-universities").value;
+  const responseType = document.getElementById("response-type").value;
+  const apiResponseElement = document.getElementById("api-response");
+
+  if (!fileInput.files[0]) {
+    apiResponseElement.textContent = "Please select a text file";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+  formData.append("number_of_universities", numUniversities);
+  formData.append("response_type", responseType);
+
+  try {
+    apiResponseElement.textContent = "Fetching data...";
+
+    const response = await fetch("http://127.0.0.1:5000/generate", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const contentType = response.headers.get("content-type");
+
+    if (responseType === "csv") {
+      if (contentType && contentType.includes("text/csv")) {
+        // Handle CSV response
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "universities_data.csv";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        apiResponseElement.textContent = "CSV file downloaded successfully!";
+      } else {
+        // If server sent an error message instead of CSV
+        const text = await response.text();
+        apiResponseElement.textContent = `Error: ${text}`;
+      }
+    } else if (responseType === "graph") {
+      if (contentType && contentType.includes("image")) {
+        const blob = await response.blob();
+        const imgUrl = URL.createObjectURL(blob);
+        apiResponseElement.innerHTML = `<img src="${imgUrl}" alt="Universities Graph" style="max-width: 100%; height: auto;">`;
+      } else {
+        const text = await response.text();
+        apiResponseElement.textContent = `Error: ${text}`;
+      }
+    } else {
+      // Handle JSON response
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        // Format the text response with better styling
+        const universities = data.generated_text.split("\n");
+        let formattedHtml = '<div class="university-list">';
+
+        universities.forEach((line) => {
+          if (line.trim()) {
+            if (line.startsWith("Here is")) {
+              formattedHtml += `<h3>${line}</h3>`;
+            } else if (line.match(/^\d+\./)) {
+              formattedHtml += `<div class="university-item">`;
+              formattedHtml += `<h4>${line}</h4>`;
+            } else if (line.startsWith("-")) {
+              formattedHtml += `<p>${line}</p>`;
+            } else if (line.startsWith("Please note")) {
+              formattedHtml += `</div><p class="note">${line}</p>`;
+            } else if (line.trim()) {
+              formattedHtml += `</div>`;
+            }
+          }
+        });
+
+        formattedHtml += "</div>";
+        apiResponseElement.innerHTML = formattedHtml;
+      } else {
+        const text = await response.text();
+        apiResponseElement.textContent = `Error: ${text}`;
+      }
+    }
+  } catch (error) {
+    apiResponseElement.textContent = `Error: ${error.message}`;
+    console.error("Error:", error);
+  }
+}

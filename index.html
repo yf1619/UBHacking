@@ -66,12 +66,27 @@
       <section class="section-hero">
         <div class="hero">
           <div class="hero-text-box">
-            <h1 class="heading-primary"></h1>
-            <p class="hero-description">
-              The smart 365-days-per-year food subscription that will make you
-              eat healthy again. Tailored to your personal tastes and
-              nutritional needs.
+            <h1 class="heading-primary">University Data API</h1>
+            <p class="hero-description" id="api-response">
+              Loading university data...
             </p>
+            <div class="api-controls">
+              <input type="file" id="file-input" accept=".txt" class="btn" />
+              <input
+                type="number"
+                id="num-universities"
+                placeholder="Number of universities"
+                min="1"
+                class="btn"
+              />
+              <select id="response-type" class="btn">
+                <option value="csv">CSV</option>
+                <option value="graph">Graph</option>
+              </select>
+              <button onclick="fetchData()" class="btn btn--full">
+                Fetch Data
+              </button>
+            </div>
             <a href="#cta" class="btn btn--full margin-right-sm"
               >Start eating well</a
             >

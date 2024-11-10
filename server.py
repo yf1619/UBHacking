@@ -7,8 +7,10 @@ import uuid
 import pandas as pd
 import matplotlib.pyplot as plt
 import re
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 app.secret_key = 'your_secret_key'  # Set a secret key for session encryption
 
 # Initialize Cohere client (use your actual API key)

@@ -1292,3 +1292,28 @@ a:hover {
   white-space: pre-wrap;
   font-family: "Courier New", monospace; /* Terminal-style font */
 }
+
+/* New separate class for wider CSV content */
+.wide-csv-container {
+  width: 90vw; /* 90% of viewport width */
+  margin-left: calc(-45vw + 50%); /* Center the wider container */
+  margin-right: calc(-45vw + 50%);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Update existing CSV content styles */
+#csv-content {
+  display: none;
+  margin: 4rem auto;
+  padding: 4rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(158, 138, 193, 0.2);
+  height: auto;
+  overflow-y: scroll;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #9f8ac1;
+}

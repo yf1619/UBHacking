@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Omnifood is an AI-powered food subscription that will take you eat healthy again
+    ,365 days per year. It's tailored your personal tastes and nutrition needs."
+    />
+    <!-- Always include this line of code!!! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="img/favicon copy.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+    <title>
+      AI Tuition Ranker &mdash; Use AI to find affordable universities.
+    </title>
+  </head>
+  <body>
+    <header class="header-main">
+      <div class="header-container">
+        <a
+          href="#"
+          class="header-logo"
+          style="font-weight: normal"
+          onclick="scrollToTop(event)"
+          >COHERE.AI</a
+        >
+        <nav class="header-nav">
+          <ul class="header-nav-list">
+            <li><a class="header-nav-link" href="#how">How it works</a></li>
+            <li><a class="header-nav-link" href="#testimonial">Stories</a></li>
+            <li><a class="header-nav-link" href="#cta">Feedback</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section-hero">
+        <div class="hero">
+          <h1 class="heading-primary align-with-logo">AI Tuition Ranker</h1>
+          <div class="hero-text-box">
+            <p class="hero-description" id="api-response">
+              Click Fetch Data to get university information
+            </p>
+            <p class="hero-description wide-csv-container" id="csv-content">
+              <!-- CSV content will be displayed here -->
+            </p>
+            <div class="api-controls">
+              <input
+                type="number"
+                id="num-universities"
+                placeholder="Number of universities"
+                min="1"
+                class="search-input"
+              />
+              <button onclick="fetchData()" class="call-button">
+                Fetch Data
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-featured">
+        <div class="container">
+          <div class="scroll-content">
+            <!-- <h2>Sponsored by</h2> -->
+            <div class="logos">
+              <img src="img/logos/UBLogoSmall.png" alt="UBLogoSmall logo" />
+              <img src="img/logos/VALMARLogo.png" alt="VALMARLogo" />
+              <img src="img/logos/sift.png" alt="Sift" />
+              <img src="img/logos/MTLogo.png" alt="MTLogo" />
+              <img src="img/logos/aws.png" alt="AWS" />
+              <img src="img/logos/northtown.png" alt="northtown" />
+              <img src="img/logos/advance.png" alt="advance" />
+            </div>
+          </div>
+          <!-- Duplicate content for seamless scrolling -->
+          <div class="scroll-content">
+            <!-- <h2>Sponsored by</h2> -->
+            <div class="logos">
+              <img src="img/logos/UBLogoSmall.png" alt="UBLogoSmall logo" />
+              <img src="img/logos/VALMARLogo.png" alt="VALMARLogo" />
+              <img src="img/logos/sift.png" alt="Sift" />
+              <img src="img/logos/MTLogo.png" alt="MTLogo" />
+              <img src="img/logos/aws.png" alt="AWS" />
+              <img src="img/logos/northtown.png" alt="northtown" />
+              <img src="img/logos/advance.png" alt="advance" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-how" id="how">
+        <div class="container align-with-logo">
+          <span class="subheading align-left">How it works</span>
+          <h2 class="heading-secondary align-left">
+            Let's find
+            <span class="affordable-text">AFFORDABLE</span> universities
+          </h2>
+        </div>
+
+        <div class="container grid">
+          <!-- STEP 01 -->
+          <div class="step-text-box">
+            <p class="step-number">01</p>
+            <h3 class="heading-tertiary">Input Your Requirements</h3>
+            <p class="step-description">
+              Simply enter the number of universities you want to explore. Our
+              system will fetch detailed information about various universities,
+              helping you make informed decisions about your educational
+              journey.
+            </p>
+          </div>
+
+          <!-- STEP 02 -->
+          <div class="step-text-box">
+            <p class="step-number">02</p>
+            <h3 class="heading-tertiary">Review University Data</h3>
+            <p class="step-description">
+              Get instant access to comprehensive university information
+              including tuition costs, enrollment numbers, academic programs,
+              and other key metrics that matter to your college decision
+              process.
+            </p>
+          </div>
+
+          <!-- STEP 03 -->
+          <div class="step-text-box">
+            <p class="step-number">03</p>
+            <h3 class="heading-tertiary">Make Informed Decisions</h3>
+            <p class="step-description">
+              Compare universities side by side, analyze their offerings, and
+              make data-driven decisions about your educational future. Our
+              platform helps you navigate through the complex world of college
+              selection with ease.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-testimonials" id="testimonial">
+        <div class="testimonials-container">
+          <span class="subheading">Testimonials</span>
+          <h2 class="heading-secondary">Real Stories from Our Users</h2>
+
+          <div class="testimonials">
+            <!-- Parent 1 -->
+            <figure class="testimonial">
+              <img
+                class="testimonial-img"
+                alt="Photo of customer Dave Bryson"
+                src="img/customers/dave.jpg"
+              />
+              <blockquote class="testimonial-text">
+                "As a parent of twins, college costs were overwhelming. This
+                tool helped us compare tuition costs across multiple
+                universities and find affordable options that still met our
+                academic standards. We saved over $15,000 per year per child!"
+              </blockquote>
+              <p class="testimonial-name">
+                &mdash; Sarah Johnson, Parent of Two
+              </p>
+            </figure>
+
+            <!-- Parent 2 -->
+            <figure class="testimonial">
+              <img
+                class="testimonial-img"
+                alt="Photo of customer Ben Hadley"
+                src="img/customers/ben.jpg"
+              />
+              <blockquote class="testimonial-text">
+                "The College Tuition Turntable made our college search process
+                so much more efficient. We could easily filter universities
+                based on our budget and compare financial aid packages. My
+                daughter is now attending her dream school with a manageable
+                tuition plan."
+              </blockquote>
+              <p class="testimonial-name">&mdash; Michael Chen, Parent</p>
+            </figure>
+
+            <!-- Student 1 -->
+            <figure class="testimonial">
+              <img
+                class="testimonial-img"
+                alt="Photo of customer Steve Miller"
+                src="img/customers/steve.jpg"
+              />
+              <blockquote class="testimonial-text">
+                "As a first-generation college student, I was lost about college
+                costs. This platform helped me understand tuition breakdowns and
+                find universities offering the best value for my Computer
+                Science degree. I'm now studying at an excellent university with
+                minimal student loans!"
+              </blockquote>
+              <p class="testimonial-name">
+                &mdash; Emily Rodriguez, Computer Science Student
+              </p>
+            </figure>
+
+            <!-- Student 2 -->
+            <figure class="testimonial">
+              <img
+                class="testimonial-img"
+                alt="Photo of customer Hannah Smith"
+                src="img/customers/hannah.jpg"
+              />
+              <blockquote class="testimonial-text">
+                "The cost comparison feature is a game-changer! I was able to
+                find a university that offered my desired Engineering program at
+                almost half the cost of my initial choice. The platform's data
+                helped me make an informed decision without compromising on
+                education quality."
+              </blockquote>
+              <p class="testimonial-name">
+                &mdash; James Wilson, Engineering Student
+              </p>
+            </figure>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <!-- Gallery content -->
+        </div>
+      </section>
+
+      <section class="section-cta" id="cta">
+        <div class="container">
+          <div class="cta">
+            <div class="cta-text-box">
+              <h2 class="heading-secondary">Share Your Feedback</h2>
+              <p class="cta-text">
+                Help us improve our college tuition data platform! Your feedback
+                is valuable in making this tool more useful for students and
+                families making important educational decisions.
+              </p>
+
+              <form class="cta-form" name="feedback" netify>
+                <div>
+                  <label for="full-name">Full Name</label>
+                  <input
+                    id="full-name"
+                    type="text"
+                    placeholder="John Smith"
+                    name="full-name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="email">Email address</label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="me@example.com"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="feedback-type">Type of Feedback</label>
+                  <select id="feedback-type" name="feedback-type" required>
+                    <option value="">Please select a category:</option>
+                    <option value="feature">Feature Request</option>
+                    <option value="bug">Bug Report</option>
+                    <option value="improvement">Improvement Suggestion</option>
+                    <option value="data">Data Accuracy</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-full-width">
+                  <label for="feedback-message">Your Feedback</label>
+                  <textarea
+                    id="feedback-message"
+                    name="feedback-message"
+                    placeholder="Please share your thoughts..."
+                    required
+                    rows="4"
+                  ></textarea>
+                </div>
+
+                <button class="btn btn--form">Submit Feedback</button>
+              </form>
+            </div>
+            <div
+              class="cta-img-box"
+              role="img"
+              aria-label="Student using laptop"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-logo-section">
+          <a href="#" class="footer-logo">
+            <img class="logo" alt="Omnifood logo" src="img/logos/CTTLOGO.png" />
+          </a>
+
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+
+          <p class="copyright">
+            Copyright &copy; 2027 by Yiwei Feng, Yujie Zou, Jingzhi Chen. All
+            rights reserved.
+          </p>
+        </div>
+
+        <div class="footer-contact-section">
+          <p class="footer-contact-heading">Contact us</p>
+          <address class="footer-contact-address">
+            <p class="footer-address-text">
+              University at Buffalo, The State University of New York<br />
+              338 Davis Hall Box 602000<br />
+              Buffalo, NY 14260-2500
+            </p>
+          </address>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      function updateApiResponse(message, isSuccess = false) {
+        const apiResponse = document.getElementById("api-response");
+        apiResponse.textContent = message;
+        if (isSuccess) {
+          apiResponse.classList.add("success-message");
+        } else {
+          apiResponse.classList.remove("success-message");
+        }
+      }
+
+      // Update your fetchData function to use this
+      async function fetchData() {
+        // ... existing fetch logic ...
+
+        // When successful, update with green text
+        updateApiResponse("CSV file downloaded and displayed below!", true);
+
+        // If there's an error
+        // updateApiResponse("Error message here", false);
+      }
+    </script>
+  </body>
+</html>

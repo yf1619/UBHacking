@@ -1,6 +1,6 @@
 import matplotlib
 matplotlib.use('Agg')  # Use the non-GUI backend for rendering plots
-from flask import Flask, request, jsonify, send_file, session
+from flask import Flask, request, jsonify, send_file, session, render_template
 import cohere
 import os
 import uuid
@@ -21,7 +21,7 @@ user_sessions = {}
 
 @app.route('/')
 def home():
-    return "Welcome to the Novel Generator API. Use the /generate endpoint to submit a request."
+    return render_template('index.html')
 
 @app.route('/generate', methods=['POST'])
 def generate_novel():

@@ -618,18 +618,23 @@ main {
 .footer {
   background-color: #f1f1f1;
   padding: 2rem 0;
-  text-align: center;
   font-size: 1.4rem;
   color: #666;
 }
 
-.grid--footer {
-  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.logo-col {
-  display: flex;
-  flex-direction: column;
+/* Logo section styles */
+.footer-logo-section {
+  flex: 1;
+  max-width: 60%;
 }
 
 .footer-logo {
@@ -637,60 +642,77 @@ main {
   margin-bottom: 3.2rem;
 }
 
+.footer-logo .logo {
+  height: 16rem;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Social links styles */
 .social-links {
   list-style: none;
   display: flex;
   gap: 2.4rem;
+  margin-bottom: 3.2rem;
 }
 
 .social-icon {
   height: 2.4rem;
   width: 2.4rem;
+  color: #666;
 }
 
+/* Copyright text */
 .copyright {
   font-size: 1.4rem;
   line-height: 1.6;
   color: #767676;
-  margin-top: auto;
-  padding: 0 1rem;
-  text-align: center;
 }
 
-.footer-heading {
+/* Contact section styles */
+.footer-contact-section {
+  text-align: right;
+  padding-left: 2rem;
+}
+
+.footer-contact-heading {
   font-size: 1.8rem;
   font-weight: 500;
   margin-bottom: 4rem;
+  color: #333;
 }
 
-.contacts {
+.footer-contact-address {
   font-style: normal;
+}
+
+.footer-address-text {
   font-size: 1.6rem;
   line-height: 1.6;
-}
-
-.address {
-  margin-bottom: 2.4rem;
-}
-
-.footer-nav {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-}
-
-.footer-link:link,
-.footer-link:visited {
-  text-decoration: none;
-  font-size: 1.6rem;
   color: #666;
-  transition: all 0.3s;
 }
 
-.footer-link:hover,
-.footer-link:active {
-  color: #333;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4rem;
+  }
+
+  .footer-logo-section {
+    max-width: 100%;
+  }
+
+  .footer-contact-section {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
 }
 
 #api-response {

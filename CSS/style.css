@@ -730,10 +730,10 @@ main {
 
 #api-response {
   white-space: pre-line;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: #1e1e1e; /* Terminal black */
   padding: 2rem;
-  border-radius: 9px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(158, 138, 193, 0.2);
   max-height: 600px;
   overflow-y: auto;
   display: flex;
@@ -742,7 +742,30 @@ main {
   min-height: 100px;
   text-align: center;
   font-size: 2.4rem;
-  color: #555;
+  font-family: "Courier New", monospace; /* Terminal font */
+  color: #fff; /* Default white text */
+  border: 1px solid #9f8ac1;
+  position: relative;
+}
+
+/* Success message style */
+#api-response.success-message {
+  color: #00ff00; /* Terminal green */
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.3); /* Subtle glow for success */
+}
+
+/* Add subtle terminal cursor effect */
+#api-response::after {
+  content: "_";
+  animation: blink 1s step-end infinite;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .university-list h3 {

@@ -368,6 +368,27 @@
           behavior: "smooth",
         });
       }
+
+      function updateApiResponse(message, isSuccess = false) {
+        const apiResponse = document.getElementById("api-response");
+        apiResponse.textContent = message;
+        if (isSuccess) {
+          apiResponse.classList.add("success-message");
+        } else {
+          apiResponse.classList.remove("success-message");
+        }
+      }
+
+      // Update your fetchData function to use this
+      async function fetchData() {
+        // ... existing fetch logic ...
+
+        // When successful, update with green text
+        updateApiResponse("CSV file downloaded and displayed below!", true);
+
+        // If there's an error
+        // updateApiResponse("Error message here", false);
+      }
     </script>
   </body>
 </html>

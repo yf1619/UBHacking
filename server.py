@@ -78,10 +78,13 @@ def generate_novel():
         universities = parse_universities_response(generated_text)
         df = pd.DataFrame(universities)
 
+        # Only keep Name and Details columns
+        df = df[['Name', 'Details']]
+
         if response_type == 'csv':
             csv_path = '/tmp/universities_list.csv'
             df.to_csv(csv_path, index=False)
-            return send_file(csv_path, as_attachment=True)
+            return send_file(csv_path, as_attachment=True, mimetype='text/csv')
 
         elif response_type == 'graph':
             graph_path = '/tmp/universities_chart.png'
@@ -116,15 +119,13 @@ def parse_universities_response(text):
 
         elif current_university and line:
             # Extract ranking and tuition details
-            if 'Ranking' in line:
-                rank_match = re.search(r'Ranking \(2024\): (.*?)(\.|,)', line)
-                if rank_match:
-                    current_university['Rank'] = rank_match.group(1).strip()
+            rank_match = re.search(r'U\.S\. News Ranking \(2024\):\s*(\d+)', line, re.IGNORECASE)
+            if rank_match:
+                current_university['Rank'] = rank_match.group(1).strip()
 
-            if 'Tuition Fee' in line:
-                tuition_match = re.search(r'Tuition Fee: (.*?) per year', line)
-                if tuition_match:
-                    current_university['Tuition'] = tuition_match.group(1).strip()
+            tuition_match = re.search(r'Tuition Fee for International Students:\s*[\w\s]*\s*\$([\d,]+)', line, re.IGNORECASE)
+            if tuition_match:
+                current_university['Tuition'] = tuition_match.group(1).strip()
 
             # Append additional detail lines to the 'Details' key
             current_university['Details'] += line + ' '
@@ -133,9 +134,11 @@ def parse_universities_response(text):
     if current_university:
         universities.append(current_university)
 
-    # Clean up whitespace in details
+    # Clean up whitespace in details and combine Rank and Tuition into Details
     for uni in universities:
-        uni['Details'] = uni['Details'].strip() if uni['Details'] else 'N/A'
+        rank_detail = f"Rank: {uni['Rank']}" if uni['Rank'] else ''
+        tuition_detail = f"Tuition: ${uni['Tuition']}" if uni['Tuition'] else ''
+        uni['Details'] = f"{rank_detail}, {tuition_detail}. {uni['Details'].strip()}" if uni['Details'] else 'N/A'
 
     return universities
 

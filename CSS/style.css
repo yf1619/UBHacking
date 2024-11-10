@@ -104,27 +104,37 @@
 
 .section-hero {
   background-color: #fdf2e9;
-  padding: 4.8rem 0 9.6rem 0;
+  padding: 12rem 0 18rem 0;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .hero {
-  max-width: 130rem;
+  max-width: 150rem;
   margin: 0 auto;
-  padding: 0 3.2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9.6rem;
-  align-items: center;
+  padding: 0 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 90vh;
+}
+
+.hero-text-box {
+  max-width: 120rem;
+  text-align: center;
+  padding: 6rem;
+}
+
+.heading-primary {
+  font-size: 7.2rem;
+  line-height: 1.1;
+  margin-bottom: 5rem;
 }
 
 .hero-description {
-  font-size: 2rem;
-  line-height: 1.6;
-  margin-bottom: 4.8rem;
-}
-
-.hero-img {
-  width: 100%;
+  font-size: 2.8rem;
+  line-height: 1.8;
+  margin-bottom: 7rem;
 }
 
 .delivered-meals {
@@ -714,4 +724,166 @@
   padding: 1rem;
   background-color: #f8f9fa;
   border-radius: 9px;
+}
+
+.csv-display {
+  margin-top: 3rem;
+  border: 2px solid #e67e22;
+  border-radius: 12px;
+  overflow: visible;
+}
+
+.csv-header {
+  background-color: #e67e22;
+  color: white;
+  font-weight: 600;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 3rem;
+}
+
+.csv-row {
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #eee;
+  background-color: #fff;
+  min-height: fit-content;
+}
+
+.csv-row:last-child {
+  border-bottom: none;
+}
+
+.csv-row:nth-child(even) {
+  background-color: #fdf2e9;
+}
+
+.csv-cell {
+  flex: 1;
+  padding: 0 3rem;
+  font-size: 2.4rem;
+  line-height: 2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+#csv-content {
+  margin-top: 4rem;
+  width: 100%;
+  padding: 4rem;
+  background-color: rgba(255, 255, 255, 0.97);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  height: 60vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.api-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+.api-controls input,
+.api-controls select,
+.api-controls button {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  font-size: 2.2rem;
+  border: 1px solid #e67e22;
+  border-radius: 9px;
+  background-color: #fff;
+}
+
+.api-controls input[type="file"] {
+  max-width: 100%;
+}
+
+.api-controls input[type="number"] {
+  width: 100%;
+}
+
+.api-controls select {
+  width: 100%;
+}
+
+.api-controls button {
+  background-color: #e67e22;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.api-controls button:hover {
+  background-color: #cf711f;
+}
+
+.csv-cell {
+  flex: 1;
+  padding: 0 3rem;
+  font-size: 2.4rem;
+  line-height: 2;
+  word-wrap: break-word;
+}
+
+/* Make the Name column take up less space than Details */
+.csv-cell:first-child {
+  flex: 0.4;
+}
+
+.csv-cell:last-child {
+  flex: 0.6;
+}
+
+/* Add smooth scrolling behavior */
+.csv-display {
+  scroll-behavior: smooth;
+}
+
+/* Style the scrollbar */
+#csv-content::-webkit-scrollbar {
+  width: 16px;
+}
+
+#csv-content::-webkit-scrollbar-track {
+  background: #fdf2e9;
+  border-radius: 8px;
+}
+
+#csv-content::-webkit-scrollbar-thumb {
+  background-color: #e67e22;
+  border-radius: 8px;
+  border: 3px solid #fdf2e9;
+}
+
+/* Add Firefox scrollbar styling */
+#csv-content {
+  scrollbar-width: thin;
+  scrollbar-color: #e67e22 #fdf2e9;
+}
+
+/* Ensure content rows are properly sized */
+.csv-row {
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #eee;
+  background-color: #fff;
+  min-height: fit-content;
+}
+
+/* Ensure the header stays visible while scrolling */
+.csv-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #e67e22;
 }

@@ -163,6 +163,35 @@ async function fetchData() {
       if (contentType && contentType.includes("text/csv")) {
         // Handle CSV response
         const blob = await response.blob();
+        const csvText = await blob.text(); // Convert blob to text
+
+        // Display CSV content on the webpage
+        const csvContentElement = document.getElementById("csv-content");
+        const rows = csvText.split("\n");
+        let formattedHtml = '<div class="csv-display">';
+
+        rows.forEach((row, index) => {
+          const columns = row.split(",");
+          if (index === 0) {
+            // Header row
+            formattedHtml += '<div class="csv-header">';
+            formattedHtml += `<span class="csv-cell">Name</span>`;
+            formattedHtml += `<span class="csv-cell">Details</span>`;
+            formattedHtml += "</div>";
+          } else if (row.trim()) {
+            // Data rows
+            formattedHtml += '<div class="csv-row">';
+            formattedHtml += `<span class="csv-cell">${columns[0]}</span>`; // Name
+            formattedHtml += `<span class="csv-cell">${columns
+              .slice(1)
+              .join(",")}</span>`; // Details
+            formattedHtml += "</div>";
+          }
+        });
+        formattedHtml += "</div>";
+        csvContentElement.innerHTML = formattedHtml;
+
+        // Also download the file as before
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -171,7 +200,8 @@ async function fetchData() {
         a.click();
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
-        apiResponseElement.textContent = "CSV file downloaded successfully!";
+        apiResponseElement.textContent =
+          "CSV file downloaded and displayed below!";
       } else {
         // If server sent an error message instead of CSV
         const text = await response.text();

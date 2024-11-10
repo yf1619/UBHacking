@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 0 10px 0;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   width: 100%;
@@ -20,7 +20,7 @@
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  padding-left: 20px;
+  padding-left: 40px;
 }
 
 .logo {
@@ -28,7 +28,7 @@
   font-weight: bold;
   color: #333;
   text-decoration: none;
-  margin-left: 20px;
+  margin-left: 0;
   margin-right: auto;
 }
 
@@ -149,33 +149,43 @@
 
 .section-hero {
   background-color: #fff;
-  padding: 8rem 0;
+  padding: 2rem 0;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .hero {
-  max-width: 150rem;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 8rem;
+  padding: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: flex-start;
-  min-height: 90vh;
+  min-height: 80vh;
+}
+
+.align-with-logo {
+  text-align: left;
+  margin-left: 40px;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  width: 100%;
+  padding-left: 0;
 }
 
 .hero-text-box {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  padding: 0 8rem;
+  width: 100%;
 }
 
 .heading-primary {
   font-size: 3.5rem;
   margin-bottom: 2rem;
   color: #222;
-  text-align: center;
-  margin-left: 20px;
+  text-align: left;
 }
 
 .hero-description {
@@ -222,28 +232,100 @@
 /**************************/
 
 .section-featured {
-  padding: 4.8rem 0 3.2rem 0;
+  padding: 2rem 0 3.2rem 0;
+  overflow: hidden;
+}
+
+/* Create a scrolling container for both heading and logos */
+.section-featured .container {
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+
+/* Style for the scrolling content wrapper */
+.scroll-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 0 2rem;
+  flex-shrink: 0; /* Prevent content from shrinking */
 }
 
 .heading-featured-in {
-  font-size: 1.4rem;
+  font-size: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 0.75px;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 2.4rem;
-  color: #888;
+  font-weight: 600;
+  color: #333;
+  margin-right: 4rem; /* Space between heading and logos */
+  flex-shrink: 0; /* Prevent text from shrinking */
 }
 
 .logos {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  gap: 4rem;
+  flex-shrink: 0; /* Prevent logos from shrinking */
+}
+
+/* Create duplicate content for seamless scrolling */
+.scroll-content {
+  animation: scroll 30s linear infinite;
+}
+
+.scroll-content:nth-child(2) {
+  animation: scroll2 30s linear infinite;
+  animation-delay: -15s;
+}
+
+/* Create the scrolling animations */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll2 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Pause animation on hover */
+.section-featured .container:hover .scroll-content {
+  animation-play-state: paused;
 }
 
 .logos img {
-  height: 3.2rem;
-  filter: brightness(0);
-  opacity: 50%;
+  height: 5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.logos img:hover {
+  transform: scale(1.1);
+}
+
+/* Hide scrollbar */
+.section-featured .container::-webkit-scrollbar {
+  display: none;
+}
+
+.section-featured .container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /**************************/
@@ -980,5 +1062,8 @@ a:hover {
 }
 
 .align-with-logo {
-  margin-left: 20px; /* Match this value with the logo's margin */
+  text-align: left;
+  margin-left: 0;
+  padding-left: 20px;
+  width: 100%;
 }
